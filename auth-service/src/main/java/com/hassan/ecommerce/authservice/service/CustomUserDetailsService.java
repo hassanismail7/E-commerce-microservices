@@ -1,4 +1,4 @@
-package com.hassan.ecommerce.authservice.sercive;
+package com.hassan.ecommerce.authservice.service;
 
 import com.hassan.ecommerce.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

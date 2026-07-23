@@ -1,4 +1,4 @@
-package com.hassan.ecommerce.authservice.sercive;
+package com.hassan.ecommerce.authservice.service;
 
 import org.springframework.stereotype.Service;
 
