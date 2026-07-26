@@ -4,6 +4,7 @@ import com.hassan.ecommerce.authservice.dto.LoginRequest;
 import com.hassan.ecommerce.authservice.dto.RegisterRequest;
 import com.hassan.ecommerce.authservice.entity.User;
 import com.hassan.ecommerce.authservice.exception.EmailAlreadyExistsException;
+import com.hassan.ecommerce.authservice.feign.WalletClient;
 import com.hassan.ecommerce.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,9 @@ public class AuthService {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    WalletClient walletClient;
+
 
     public void register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -38,10 +42,10 @@ public class AuthService {
                 , request.getEmail()
                 , encodedPw );
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-
-        // Imp: communicate with wallet service to create a wallet for this new registered user
+        // Create a wallet for the new user
+        walletClient.createWallet(savedUser.getId());
 
     }
 
