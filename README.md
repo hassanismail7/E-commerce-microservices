@@ -1,20 +1,94 @@
 # E-Commerce Microservices
 
-A scalable e-commerce application built using Spring Boot and Spring Cloud.
+A scalable e-commerce application built using **Spring Boot** and **Spring Cloud**, following a microservices architecture. The project demonstrates service discovery, inter-service communication, JWT-based authentication, and independent databases for each service.
+
+---
 
 ## Tech Stack
 
 - Spring Boot
+- Spring Cloud (Eureka Server, OpenFeign)
 - Spring Security
 - JWT Authentication
-- Spring Cloud Gateway
 - Spring Data JPA
 - MySQL
 - Maven
 
-## Planned Microservices
+---
 
+## Architecture
+
+- Eureka Server (Service Discovery)
 - Auth Service
 - Wallet Service
 - Inventory Service
+- Shop Service *(In Progress)*
+
+---
+
+## Current Features
+
+### Eureka Server
+- Service registration and discovery
+- Dynamic service lookup for microservices
+
+### Auth Service
+- User registration
+- User login
+- Password encryption using BCrypt
+- JWT generation
+- Automatic wallet creation after successful registration using OpenFeign
+
+### Wallet Service
+- Automatic wallet creation for newly registered users
+- Deposit funds
+- Withdraw funds
+- View wallet information
+- Transaction history
+- JWT validation for protected endpoints
+
+### Inventory Service *(In Progress)*
+- Product management
+- Inventory management
+- Product catalog
+- Stock management
+
+---
+
+## Microservices Communication
+
+- **Auth Service → Wallet Service**
+    - Uses **Spring Cloud OpenFeign**
+    - Service discovery through **Eureka**
+    - Automatically creates a wallet when a new user registers
+
+---
+
+## Security
+
+- JWT Authentication
+- Stateless session management
+- BCrypt password hashing
+- Spring Security
+
+---
+
+## Database
+
+Each microservice owns its own database.
+
+- Auth Database
+- Wallet Database
+- Inventory Database
+- Shop Database *(Planned)*
+
+---
+
+## Planned Features
+
+- API Gateway
 - Shop Service
+- Order Management
+- Product Search
+- Payment Workflow
+- Role-Based Authorization (Admin / Customer)
