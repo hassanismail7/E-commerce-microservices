@@ -1,5 +1,6 @@
 package com.hassan.ecommerce.inventory_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,16 +10,17 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "product_id",
             nullable = false,
             unique = true
     )
+    @JsonIgnore
     private Product product;
 
     @Column(nullable = false)
-    private Integer quantity;
+    private int quantity;
 
 
     public Inventory() {
@@ -45,11 +47,11 @@ public class Inventory {
         this.product = product;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }
