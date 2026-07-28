@@ -7,10 +7,13 @@ A scalable e-commerce application built using **Spring Boot** and **Spring Cloud
 ## Tech Stack
 
 - Spring Boot
-- Spring Cloud (Eureka Server, OpenFeign)
+- Spring Cloud
+  - Eureka Server
+  - OpenFeign
 - Spring Security
 - JWT Authentication
 - Spring Data JPA
+- Hibernate
 - MySQL
 - Maven
 
@@ -37,30 +40,38 @@ A scalable e-commerce application built using **Spring Boot** and **Spring Cloud
 - User login
 - Password encryption using BCrypt
 - JWT generation
+- JWT validation
 - Automatic wallet creation after successful registration using OpenFeign
 
 ### Wallet Service
 - Automatic wallet creation for newly registered users
 - Deposit funds
 - Withdraw funds
-- View wallet information
+- Retrieve wallet information
 - Transaction history
 - JWT validation for protected endpoints
+- Global exception handling
 
-### Inventory Service *(In Progress)*
-- Product management
+### Inventory Service
+- Product CRUD operations
+- Automatic inventory creation for every new product
 - Inventory management
-- Product catalog
-- Stock management
+- Increase stock
+- Decrease stock
+- Update inventory quantity
+- Product availability check
+- JWT validation for protected endpoints
+- Global exception handling
 
 ---
 
 ## Microservices Communication
 
-- **Auth Service → Wallet Service**
-    - Uses **Spring Cloud OpenFeign**
-    - Service discovery through **Eureka**
-    - Automatically creates a wallet when a new user registers
+### Auth Service → Wallet Service
+
+- Uses Spring Cloud OpenFeign
+- Service discovery through Eureka
+- Automatically creates a wallet when a new user registers
 
 ---
 
@@ -68,8 +79,8 @@ A scalable e-commerce application built using **Spring Boot** and **Spring Cloud
 
 - JWT Authentication
 - Stateless session management
-- BCrypt password hashing
 - Spring Security
+- BCrypt password hashing
 
 ---
 
@@ -89,6 +100,21 @@ Each microservice owns its own database.
 - API Gateway
 - Shop Service
 - Order Management
+- Shopping Cart
 - Product Search
 - Payment Workflow
 - Role-Based Authorization (Admin / Customer)
+- Distributed transactions between microservices
+
+---
+
+## Project Status
+
+| Service | Status |
+|---------|--------|
+| Eureka Server | Completed |
+| Auth Service | Completed |
+| Wallet Service | Completed |
+| Inventory Service | Completed |
+| Shop Service | In Progress |
+| API Gateway | Planned |
