@@ -3,12 +3,15 @@ package com.hassan.ecommerce.inventory_service.controller;
 import com.hassan.ecommerce.inventory_service.dto.CreateProductRequest;
 import com.hassan.ecommerce.inventory_service.dto.UpdateProductRequest;
 import com.hassan.ecommerce.inventory_service.entity.Product;
+import com.hassan.ecommerce.inventory_service.service.ImageService;
 import com.hassan.ecommerce.inventory_service.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,13 +22,17 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
+    @Autowired
+    private ImageService imageService;
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Product> createProduct(
-            @Valid @RequestBody CreateProductRequest request) {
+            @RequestPart("product") @Valid CreateProductRequest request,
+            @RequestPart("image") MultipartFile image) {
 
-        Product product = productService.createProduct(request);
+        Product product = productService.createProduct(request, image);
 
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
     @GetMapping("/{id}")

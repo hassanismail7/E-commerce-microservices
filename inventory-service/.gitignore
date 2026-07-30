@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Private configuration
+**/src/main/resources/application-private.properties

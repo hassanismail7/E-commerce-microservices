@@ -11,6 +11,7 @@ import com.hassan.ecommerce.inventory_service.repository.Productrepository;
 import com.hassan.ecommerce.inventory_service.repository.Productrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,14 +24,18 @@ public class ProductService {
     @Autowired
     private Inventoryrepository inventoryRepository;
 
-    public Product createProduct(CreateProductRequest request) {
+    @Autowired
+    private  ImageService imageService;
 
+    public Product createProduct(CreateProductRequest request, MultipartFile image) {
+
+        String url = imageService.uploadImage(image);
         Product product = new Product(
                 request.getName(),
                 request.getDescription(),
                 request.getPrice(),
                 request.getCategory(),
-                request.getImageUrl(),
+                url,
                 request.isBestSeller()
         );
 

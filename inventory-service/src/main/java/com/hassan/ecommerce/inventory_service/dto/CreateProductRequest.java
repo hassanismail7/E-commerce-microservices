@@ -22,8 +22,6 @@ public class CreateProductRequest {
         @NotNull
         private Category category;
 
-        private String imageUrl;
-
         private boolean bestSeller;
 
     public String getName(){
@@ -56,14 +54,6 @@ public class CreateProductRequest {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public boolean isBestSeller() {

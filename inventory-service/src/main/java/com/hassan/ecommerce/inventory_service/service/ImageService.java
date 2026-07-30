@@ -1,0 +1,38 @@
+package com.hassan.ecommerce.inventory_service.service;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Map;
+
+@Service
+public class ImageService {
+
+    @Autowired
+    private  Cloudinary cloudinary;
+
+
+    public String uploadImage(MultipartFile image) {
+
+        if (image == null || image.isEmpty()) {
+            throw new IllegalArgumentException("Image file is required.");
+        }
+
+        try {
+
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(
+                    image.getBytes(),
+                    ObjectUtils.asMap("folder", "inventory-products")
+            );
+
+            return uploadResult.get("secure_url").toString();
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload image.", e);
+        }
+    }
+}
