@@ -62,9 +62,9 @@ public class WalletService {
 
     }
 
-    public Wallet withdraw(Long walletId, BigDecimal amount) {
+    public Wallet withdraw(Long UserId, BigDecimal amount) {
 
-        Wallet wallet = walletRepository.findById(walletId)
+        Wallet wallet = walletRepository.findByUserId(UserId)
                 .orElseThrow(() ->
                         new WalletNotFoundException("Wallet not found."));
 

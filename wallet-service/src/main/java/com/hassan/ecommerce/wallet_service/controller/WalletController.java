@@ -1,6 +1,7 @@
 package com.hassan.ecommerce.wallet_service.controller;
 
 import com.hassan.ecommerce.wallet_service.dto.WalletOperationRequest;
+import com.hassan.ecommerce.wallet_service.dto.WithdrawRequest;
 import com.hassan.ecommerce.wallet_service.entity.Wallet;
 import com.hassan.ecommerce.wallet_service.service.WalletService;
 import jakarta.validation.Valid;
@@ -47,13 +48,14 @@ public class WalletController {
         );
     }
 
-    @PostMapping("/{walletId}/withdraw")
+    @PostMapping("/withdraw")
     public ResponseEntity<Wallet> withdraw(
-            @PathVariable Long walletId,
-            @Valid @RequestBody WalletOperationRequest request) {
-
+            @Valid @RequestBody WithdrawRequest request) {
         return ResponseEntity.ok(
-                walletService.withdraw(walletId, request.getAmount())
+                walletService.withdraw(
+                        request.getUserId(),
+                        request.getAmount()
+                )
         );
     }
 
