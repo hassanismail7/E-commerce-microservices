@@ -3,10 +3,12 @@ package com.hassan.ecommerce.wallet_service.controller;
 import com.hassan.ecommerce.wallet_service.dto.WalletOperationRequest;
 import com.hassan.ecommerce.wallet_service.dto.WithdrawRequest;
 import com.hassan.ecommerce.wallet_service.entity.Wallet;
+import com.hassan.ecommerce.wallet_service.security.AuthenticatedUser;
 import com.hassan.ecommerce.wallet_service.service.WalletService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,9 +50,11 @@ public class WalletController {
         );
     }
 
+    // This endpoint is hit or called internally by shop-service
     @PostMapping("/withdraw")
     public ResponseEntity<Wallet> withdraw(
             @Valid @RequestBody WithdrawRequest request) {
+
         return ResponseEntity.ok(
                 walletService.withdraw(
                         request.getUserId(),
