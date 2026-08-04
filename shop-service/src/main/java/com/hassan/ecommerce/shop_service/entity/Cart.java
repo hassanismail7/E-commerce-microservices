@@ -1,6 +1,7 @@
 package com.hassan.ecommerce.shop_service.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class Cart {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonManagedReference
     private List<CartItem> items = new ArrayList<>();
 
     @PrePersist

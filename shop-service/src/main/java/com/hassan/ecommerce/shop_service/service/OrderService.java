@@ -1,6 +1,7 @@
 package com.hassan.ecommerce.shop_service.service;
 
 import com.hassan.ecommerce.shop_service.dto.ProductResponse;
+import com.hassan.ecommerce.shop_service.dto.UpdateQuantityRequest;
 import com.hassan.ecommerce.shop_service.dto.WithdrawRequest;
 import com.hassan.ecommerce.shop_service.entity.*;
 import com.hassan.ecommerce.shop_service.exception.CartItemNotFoundException;
@@ -102,7 +103,7 @@ public class OrderService {
 
             inventoryClient.decreaseStock(
                     item.getProductId(),
-                    item.getQuantity()
+                    new UpdateQuantityRequest(item.getQuantity())
             );
         }
 

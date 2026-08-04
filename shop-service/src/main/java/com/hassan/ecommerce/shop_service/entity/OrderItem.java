@@ -1,5 +1,6 @@
 package com.hassan.ecommerce.shop_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ public class OrderItem {
             name = "order_id",
             nullable = false
     )
+    @JsonIgnore
     private Order order;
 
     @Column(nullable = false)

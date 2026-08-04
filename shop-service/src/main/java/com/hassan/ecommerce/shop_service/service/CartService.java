@@ -111,7 +111,7 @@ public class CartService {
     }
 
 
-    public void removeItem(Long userId, Long itemId) {
+    public Cart removeItem(Long userId, Long itemId) {
         Cart cart = getOrCreateCart(userId);
 
         CartItem cartItem = cart.getItems()
@@ -124,6 +124,7 @@ public class CartService {
         cart.removeItem(cartItem);
 
         cartRepository.save(cart);
+        return cart;
     }
 
     public void clearCart(Long userId) {

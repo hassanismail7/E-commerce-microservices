@@ -1,5 +1,7 @@
 package com.hassan.ecommerce.shop_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -17,6 +19,7 @@ public class CartItem {
             name = "cart_id",
             nullable = false
     )
+    @JsonBackReference
     private Cart cart;
 
     @Column(nullable = false)
